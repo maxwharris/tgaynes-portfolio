@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getBioContent } from '../utils/csvParser';
 
 function Home() {
-  const bioContent = getBioContent();
+  const [bioContent, setBioContent] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadBioContent = async () => {
+      try {
+        const content = await getBioContent();
+        setBioContent(content);
+      } catch (error) {
+        console.error('Error loading bio content:', error);
+        setBioContent('Error loading bio content. Please try refreshing the page.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBioContent();
+  }, []);
 
   return (
     <div className="page">

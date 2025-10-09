@@ -16,16 +16,26 @@ export const parseCSV = (csvContent) => {
   });
 };
 
-// For now, we'll use placeholder data since we can't read files at runtime in the browser
-// In a real application, you might use a build process or API to load this data
-export const getBioContent = () => {
-  return `Truman Portfolio Bio
+// Fetch bio content from the public folder
+export const getBioContent = async () => {
+  try {
+    const response = await fetch('/bio.txt');
+    if (!response.ok) {
+      throw new Error('Failed to fetch bio content');
+    }
+    const text = await response.text();
+    return text;
+  } catch (error) {
+    console.error('Error loading bio content:', error);
+    // Fallback to placeholder content if file can't be loaded
+    return `Truman Portfolio Bio
 
 I'm a passionate musician and producer based in [City], with over [X] years of experience creating unique sounds that blend [genres/styles]. My journey in music began [when/how], and I've been fortunate to [achievements/highlights].
 
 I specialize in [music style/production type] and have worked with [clients/artists/types of projects]. My music has been featured in [places/shows/projects], and I'm always looking for new opportunities to collaborate and create.
 
 When I'm not in the studio, you can find me [hobbies/interests] or exploring new sounds and techniques to incorporate into my work.`;
+  }
 };
 
 export const getDiscographyData = () => {
