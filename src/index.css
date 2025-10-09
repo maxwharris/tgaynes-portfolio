@@ -234,7 +234,7 @@ code {
 
 /* Resume page */
 .resume-container {
-  max-width: 1000px;
+  max-width: 100%;
 }
 
 .tabs {
@@ -243,6 +243,7 @@ code {
   margin-bottom: 32px;
   overflow-x: visible;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .tab-button {
@@ -269,6 +270,7 @@ code {
 
 .tab-content {
   /* Container for all tab content */
+  max-width: 800px;
 }
 
 .tab-pane {
