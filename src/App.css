@@ -1,0 +1,81 @@
+/* App-specific styles */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 40px 0;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.main-content {
+  margin-left: 280px;
+  flex: 1;
+  padding: 40px;
+  min-height: 100vh;
+}
+
+.nav-item {
+  display: block;
+  padding: 16px 32px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.nav-item:hover {
+  background: rgba(74, 144, 226, 0.1);
+  color: #4A90E2;
+  border-left-color: #4A90E2;
+}
+
+.nav-item.active {
+  background: rgba(74, 144, 226, 0.15);
+  color: #4A90E2;
+  border-left-color: #4A90E2;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 32px;
+}
+
+.logo h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #4A90E2;
+  margin-bottom: 8px;
+}
+
+.logo p {
+  color: #666;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+}

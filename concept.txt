@@ -1,0 +1,20 @@
+music portfolio website made in react. include nav bar and footer on every page. vertical-left side navbar.  
+
+color scheme: white with black text. light grey for shaded areas and blue for accent.
+style: modern and flowy. Rounded corners only.
+
+home page:
+-personal bio (from bio.txt)
+-headshot
+
+music page:
+- multiple soundcloud playlists embedded.
+- discography at the bottom (populate from discog.csv)
+
+resume page:
+- put resume on excel sheet --> export csv (resume.csv) --> populate resume page 
+- have each job on a separate tab (tabs aligned top-horizontal). tab headers include job and dates. tab content includes more info. 
+
+
+contact page: 
+- formsubmit with captchav2 to direct to personal email 
