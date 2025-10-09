@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Music from './pages/Music';
-import Resume from './pages/Resume';
+import Experiences from './pages/Experiences';
 import Contact from './pages/Contact';
 import './App.css';
 
@@ -35,10 +35,10 @@ function App() {
             Music
           </Link>
           <Link
-            to="/resume"
-            className={`nav-item ${activeTab === '/resume' ? 'active' : ''}`}
+            to="/experiences"
+            className={`nav-item ${activeTab === '/experiences' ? 'active' : ''}`}
           >
-            Resume
+            Experiences
           </Link>
           <Link
             to="/contact"
@@ -53,7 +53,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/music" element={<Music />} />
-          <Route path="/resume" element={<Resume />} />
+          <Route path="/experiences" element={<Experiences />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
