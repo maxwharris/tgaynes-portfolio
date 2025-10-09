@@ -85,7 +85,7 @@ dist
 
 # Gatsby files
 .cache/
-public
+# public - Commented out for Create React App (public/ contains essential files like index.html)
 
 # Storybook build outputs
 .out
