@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getBioContent } from '../utils/csvParser';
 
 function Home() {
   const [bioContent, setBioContent] = useState('');
   const [loading, setLoading] = useState(true);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const loadBioContent = async () => {
@@ -19,6 +20,25 @@ function Home() {
     };
 
     loadBioContent();
+
+    // Auto-play background music
+    const playAudio = async () => {
+      try {
+        if (audioRef.current) {
+          // Some browsers require user interaction for autoplay
+          // We'll attempt to play and handle any errors gracefully
+          await audioRef.current.play();
+        }
+      } catch (error) {
+        console.log('Autoplay was prevented by browser policy');
+        // Audio will be available for user to play manually if needed
+      }
+    };
+
+    // Small delay to ensure component is fully mounted
+    const timer = setTimeout(playAudio, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -45,6 +65,17 @@ function Home() {
           />
         </div>
       </div>
+
+      {/* Hidden background music player */}
+      <audio
+        ref={audioRef}
+        loop
+        preload="auto"
+        style={{ display: 'none' }}
+      >
+        <source src="/media/music/landing.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 }
