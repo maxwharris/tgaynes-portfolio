@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Music from './pages/Music';
 import Experiences from './pages/Experiences';
@@ -7,48 +8,9 @@ import Contact from './pages/Contact';
 import './App.css';
 
 function App() {
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState(location.pathname);
-
-  React.useEffect(() => {
-    setActiveTab(location.pathname);
-  }, [location]);
-
   return (
     <div className="app">
-      <nav className="sidebar">
-        <div className="logo">
-          <h1>TRUMAN</h1>
-          <p>Music Producer</p>
-        </div>
-        <div className="nav">
-          <Link
-            to="/"
-            className={`nav-item ${activeTab === '/' ? 'active' : ''}`}
-          >
-            Home
-          </Link>
-          <Link
-            to="/music"
-            className={`nav-item ${activeTab === '/music' ? 'active' : ''}`}
-          >
-            Music
-          </Link>
-          <Link
-            to="/experiences"
-            className={`nav-item ${activeTab === '/experiences' ? 'active' : ''}`}
-          >
-            Experiences
-          </Link>
-          <Link
-            to="/contact"
-            className={`nav-item ${activeTab === '/contact' ? 'active' : ''}`}
-          >
-            Contact
-          </Link>
-        </div>
-      </nav>
-
+      <Navbar />
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />

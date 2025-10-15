@@ -1,84 +1,157 @@
 /* App-specific styles */
 .app {
-  display: flex;
   min-height: 100vh;
   font-family: 'Avenir', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
 
-.sidebar {
-  width: 280px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 40px 0;
-  position: fixed;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  z-index: 1000;
-  overflow-y: auto;
-}
-
 .main-content {
-  margin-left: 280px;
-  flex: 1;
+  margin-top: 80px; /* Account for fixed navbar height */
   padding: 40px;
-  min-height: 100vh;
-}
-
-.nav-item {
-  display: block;
-  padding: 16px 32px;
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  border-left: 4px solid transparent;
-}
-
-.nav-item:hover {
-  background: rgba(74, 144, 226, 0.1);
-  color: #4A90E2;
-  border-left-color: #4A90E2;
-}
-
-.nav-item.active {
-  background: rgba(74, 144, 226, 0.15);
-  color: #4A90E2;
-  border-left-color: #4A90E2;
-}
-
-.logo {
-  text-align: center;
-  margin-bottom: 60px;
-  padding: 0 32px;
-}
-
-.logo h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #4A90E2;
-  margin-bottom: 8px;
-}
-
-.logo p {
-  color: #666;
-  font-size: 14px;
-  font-weight: 300;
+  min-height: calc(100vh - 80px);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    position: relative;
-    height: auto;
-    padding: 20px 0;
+  .main-content {
+    margin-top: 70px; /* Account for smaller navbar height on mobile */
+    padding: 20px;
+    min-height: calc(100vh - 70px);
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    margin-top: 140px; /* Account for stacked navbar on very small screens */
+    padding: 15px;
+    min-height: calc(100vh - 140px);
+  }
+}
+
+/* Cassette Tape Visualizer Styles */
+.cassette-visualizer {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cassette-body {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px;
+  padding: 20px;
+  border: 3px solid #333;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.cassette-body::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(145deg, #444, #222);
+  border-radius: 18px;
+  z-index: -1;
+}
+
+.cassette-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.track-button {
+  padding: 8px 16px;
+  border: 2px solid;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.track-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.track-button.active {
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.cassette-window {
+  background: #000;
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 15px;
+  border: 2px solid #333;
+}
+
+.window-frame {
+  background: #111;
+  border-radius: 5px;
+  padding: 2px;
+  height: 100%;
+}
+
+.visualizer-screen {
+  width: 100%;
+  background: #000;
+  border-radius: 3px;
+  display: block;
+}
+
+.cassette-info {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.track-name {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.track-description {
+  color: #ccc;
+  font-size: 13px;
+  opacity: 0.9;
+  line-height: 1.4;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .cassette-controls {
+    gap: 6px;
+    justify-content: flex-start;
   }
 
-  .main-content {
-    margin-left: 0;
-    padding: 20px;
+  .track-button {
+    padding: 6px 12px;
+    font-size: 11px;
+    min-width: 50px;
+  }
+
+  .cassette-body {
+    padding: 15px;
   }
 }

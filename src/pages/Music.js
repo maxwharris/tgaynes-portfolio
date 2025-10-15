@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getDiscographyData } from '../utils/csvParser';
+import AudioVisualizer from '../components/AudioVisualizer';
 
 function Music() {
   const discographyData = getDiscographyData();
+  const [selectedTrack, setSelectedTrack] = useState(0);
+
+  // Audio files and their corresponding presets
+  const tracks = [
+    { file: '1.wav', preset: 'electronic', name: 'Track 1' },
+    { file: '2.wav', preset: 'ambient', name: 'Track 2' },
+    { file: '3.wav', preset: 'pop', name: 'Track 3' },
+    { file: '4.wav', preset: 'rock', name: 'Track 4' },
+    { file: '5.wav', preset: 'electronic', name: 'Track 5' }
+  ];
 
   return (
     <div className="page">
@@ -11,40 +22,31 @@ function Music() {
         <p className="page-subtitle">My latest tracks and discography</p>
       </div>
 
-      {/* SoundCloud Playlists Section */}
-      <div className="card playlists-section">
-        <h3 style={{ fontSize: '24px', marginBottom: '20px', color: '#000' }}>Featured Playlists</h3>
 
-        {/* Placeholder SoundCloud embeds - replace with actual URLs */}
-        <div className="playlist-embed">
-          <iframe
-            width="100%"
-            height="300"
-            scrolling="no"
-            frameBorder="no"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/PLACEHOLDER_ID&color=%234A90E2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-            style={{ borderRadius: '12px' }}
-          ></iframe>
-        </div>
 
-        <div className="playlist-embed">
-          <iframe
-            width="100%"
-            height="300"
-            scrolling="no"
-            frameBorder="no"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/PLACEHOLDER_ID_2&color=%234A90E2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-            style={{ borderRadius: '12px' }}
-          ></iframe>
+      {/* Audio Visualizer Section */}
+      <div className="card">
+        <div className="audio-visualizer-section">
+          <h3>Cassette Tape Visualizer</h3>
+          <p style={{ marginBottom: '20px', color: '#666' }}>
+            Retro cassette design with interactive waveform visualization
+          </p>
+
+          {/* Cassette Tape Visualizer */}
+          <AudioVisualizer
+            tracks={tracks}
+            currentTrackIndex={selectedTrack}
+            onTrackChange={setSelectedTrack}
+            height={350}
+            className="cassette-player"
+          />
         </div>
       </div>
 
-      {/* Discography Section */}
+      {/* Original Discography Section (fallback) */}
       <div className="card">
         <div className="discography-section">
-          <h3>Discography</h3>
+          <h3>Complete Discography</h3>
           <div className="discography-list">
             {discographyData.map((item, index) => (
               <div key={index} className="discography-item">
@@ -62,7 +64,7 @@ function Music() {
                   className="btn btn-secondary"
                   style={{ fontSize: '14px', padding: '8px 16px' }}
                 >
-                  Listen
+                  Listen on SoundCloud
                 </a>
               </div>
             ))}
