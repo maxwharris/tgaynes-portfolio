@@ -4,7 +4,7 @@ import AudioVisualizer from '../components/AudioVisualizer';
 
 function Music() {
   const discographyData = getDiscographyData();
-  const [selectedTrack, setSelectedTrack] = useState(0);
+  const [selectedTrack, setSelectedTrack] = useState(null);
 
   // Audio files and their corresponding presets
   const tracks = [
@@ -17,20 +17,11 @@ function Music() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1 className="page-title">Music</h1>
-        <p className="page-subtitle">My latest tracks and discography</p>
-      </div>
-
-
+      
 
       {/* Audio Visualizer Section */}
       <div className="card">
         <div className="audio-visualizer-section">
-          <h3>Cassette Tape Visualizer</h3>
-          <p style={{ marginBottom: '20px', color: '#666' }}>
-            Retro cassette design with interactive waveform visualization
-          </p>
 
           {/* Cassette Tape Visualizer */}
           <AudioVisualizer

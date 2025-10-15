@@ -34,8 +34,7 @@ function Home() {
   return (
     <div className="page">
       <div className="page-header">
-        <h1 className="page-title">Welcome</h1>
-        <p className="page-subtitle">Music Producer & Licensing Administrator</p>
+        <h1 className="page-title">Music, Storytelling, and Sound Design</h1>
       </div>
 
       <div className="card">
@@ -53,6 +52,22 @@ function Home() {
               e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjVGNUY1Ii8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMCIgZmlsbD0iI0NDQ0NDQyIvPgo8cGF0aCBkPSJNNjAgMTgwQzYwIDE1MCA5MCAxMjAgMTIwIDEyMEMxNTAgMTIwIDE4MCAxNTAgMTgwIDE4MCIgZmlsbD0iI0NDQ0NDQyIvPgo8L3N2Zz4K';
             }}
           />
+        </div>
+      </div>
+
+      {/* Floating sections */}
+      <div className="floating-sections">
+        <div className="floating-section">
+          <h3 className="section-title">Education</h3>
+          <p className="section-content">NYU - Music Technology, Music Business</p>
+        </div>
+        <div className="floating-section">
+          <h3 className="section-title">Focus</h3>
+          <p className="section-content">Composition, Licensing, Sound Design</p>
+        </div>
+        <div className="floating-section">
+          <h3 className="section-title">Experience</h3>
+          <p className="section-content">Turner Music, New York Fashion Week, Project Wayfarer</p>
         </div>
       </div>
     </div>

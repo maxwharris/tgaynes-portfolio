@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 export default function AudioVisualizer({
   tracks = [],
-  currentTrackIndex = 0,
+  currentTrackIndex = null,
   onTrackChange,
   width = "100%",
   height = 300,
   className = ""
 }) {
-  // Get current track info first
-  const currentTrack = tracks[currentTrackIndex] || { name: 'No Track', preset: 'default' };
+  // Get current track info - handle null case
+  const currentTrack = currentTrackIndex !== null && tracks[currentTrackIndex] ? tracks[currentTrackIndex] : { name: 'Select a Track', preset: 'default' };
 
   // Canvas and audio refs
   const canvasRef = useRef(null);
@@ -19,6 +19,7 @@ export default function AudioVisualizer({
   const bufferRef = useRef(null);
   const sourceRef = useRef(null);
   const rafRef = useRef(null);
+  const backgroundImageRef = useRef(null);
 
   // Transport state
   const [isPlaying, setIsPlaying] = useState(false);
@@ -126,8 +127,7 @@ export default function AudioVisualizer({
 
       bufferRef.current = audioBuffer;
 
-      // Auto-play when loaded
-      play();
+      // Don't auto-play - wait for user interaction
     } catch (err) {
       console.error("Failed to load audio:", err);
     }
@@ -170,6 +170,21 @@ export default function AudioVisualizer({
     }
   };
 
+  // Pause playback
+  const pause = () => {
+    try {
+      if (sourceRef.current) {
+        sourceRef.current.stop(0);
+        sourceRef.current.disconnect();
+        sourceRef.current = null;
+      }
+      setIsPlaying(false);
+      cancelAnimationFrame(rafRef.current);
+    } catch (err) {
+      console.error("Pause failed:", err);
+    }
+  };
+
   // Analysis helpers
   const getBands = (freq, sampleRate, fft) => {
     const binHz = sampleRate / fft;
@@ -195,6 +210,8 @@ export default function AudioVisualizer({
     return Math.sqrt(sum / time.length);
   };
 
+
+
   // Render loop
   const loop = () => {
     const canvas = canvasRef.current;
@@ -217,14 +234,16 @@ export default function AudioVisualizer({
       const bands = getBands(freq, actx.sampleRate, analyser.fftSize);
       const energy = getRMS(time);
 
-      // Background reacts to treble
+      // Dark grey background
+      ctx2d.fillStyle = "#1a1a1a";
+      ctx2d.fillRect(0, 0, w, h);
+
+      // Apply color overlay that reacts to treble
       if (config.bgShift) {
         const t = Math.min(1, bands.treble * config.reactTreble * 1.5);
-        ctx2d.fillStyle = `rgba(0,0,0,${1 - t * 0.2})`;
-      } else {
-        ctx2d.fillStyle = "rgba(0,0,0,1)";
+        ctx2d.fillStyle = `rgba(0,0,0,${0.3 - t * 0.2})`;
+        ctx2d.fillRect(0, 0, w, h);
       }
-      ctx2d.fillRect(0, 0, w, h);
 
       // Glow effect
       if (config.glow) {
@@ -275,7 +294,25 @@ export default function AudioVisualizer({
     }
   }, [config.volume, config.fftSize, config.smoothing]);
 
-  // Initialize and play when component mounts or track changes
+  // Handle track button clicks - toggle play/pause for current track
+  const handleTrackClick = async (index) => {
+    if (currentTrackIndex === index) {
+      // Clicking the same track - toggle play/pause
+      if (isPlaying) {
+        pause();
+      } else {
+        await play();
+      }
+    } else {
+      // Changing to a different track
+      if (isPlaying) {
+        pause();
+      }
+      onTrackChange && onTrackChange(index);
+    }
+  };
+
+  // Initialize when component mounts or track changes
   useEffect(() => {
     if (currentTrack && currentTrack.file) {
       loadAudio();
@@ -300,10 +337,10 @@ export default function AudioVisualizer({
             <button
               key={index}
               className={`track-button ${currentTrackIndex === index ? 'active' : ''}`}
-              onClick={() => onTrackChange && onTrackChange(index)}
+              onClick={() => handleTrackClick(index)}
               style={{
-                backgroundColor: currentTrackIndex === index ? currentPalette[0] : 'rgba(255, 255, 255, 0.1)',
-                borderColor: currentPalette[1],
+                backgroundColor: currentTrackIndex === index && isPlaying ? '#ff4444' : currentTrackIndex === index ? '#cccccc' : 'rgba(255, 255, 255, 0.1)',
+                borderColor: currentTrackIndex === index ? '#999999' : '#666',
                 color: currentTrackIndex === index ? '#000' : '#fff'
               }}
             >
