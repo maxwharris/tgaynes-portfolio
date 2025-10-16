@@ -33,40 +33,59 @@ function Home() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1 className="page-title">Music, Storytelling, and Sound Design</h1>
-      </div>
-
-      <div className="card">
-        <div className="bio-content">
-          <div className="bio-text">
-            <div style={{ whiteSpace: 'pre-line' }}>
-              {bioContent}
-            </div>
-          </div>
+      {/* Hero Section */}
+      <div className="hero-section">
+        <div className="hero-image">
           <img
             src="/media/images/profile.jpg"
-            alt="Profile"
-            className="headshot"
+            alt="Truman Gaynes at work"
+            className="hero-img"
             onError={(e) => {
-              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjVGNUY1Ii8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMCIgZmlsbD0iI0NDQ0NDQyIvPgo8cGF0aCBkPSJNNjAgMTgwQzYwIDE1MCA5MCAxMjAgMTIwIDEyMEMxNTAgMTIwIDE4MCAxNTAgMTgwIDE4MCIgZmlsbD0iI0NDQ0NDQyIvPgo8L3N2Zz4K';
+              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjVGNUY1Ii8+CjxjaXJjbGUgY3g9IjIwMCIgY3k9IjE1MCIgcj0iNDAiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+';
             }}
           />
         </div>
+
+        <div className="hero-content">
+          <h1 className="hero-title">Music, Storytelling, and Sound Design</h1>
+          <div className="hero-description">
+            <p>I'm Truman Gaynes, a New York-based music technologist and licensing coordinator connecting sound to story across entertainment, fashion, and brands. I compose daily, edit dialogue and ADR, and manage organized delivery workflows that help creative teams move faster.</p>
+          </div>
+        </div>
+
+        <div className="hero-project">
+          <div className="video-showcase">
+            <iframe
+              src="https://www.youtube.com/embed/P3wJe6OwCRM"
+              title="Portfolio Video"
+              className="portfolio-video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="my-story">
+            <h3 className="story-title">My Story</h3>
+            <div className="story-content">
+              <p>My background in Music Technology and the Business of Entertainment (NYU) bridges the creative and logistical sides of sound. I've worked on dozens of original compositions, including for New York Fashion Week, interactive scores for indie games, and helping with custom pitches at Tuner Music for global brands.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Floating sections */}
-      <div className="floating-sections">
-        <div className="floating-section">
-          <h3 className="section-title">Education</h3>
+      {/* Content Sections */}
+      <div className="content-sections">
+        <div className="section-item">
+          <h3 className="section-title">education</h3>
           <p className="section-content">NYU - Music Technology, Music Business</p>
         </div>
-        <div className="floating-section">
-          <h3 className="section-title">Focus</h3>
+        <div className="section-item">
+          <h3 className="section-title">focus</h3>
           <p className="section-content">Composition, Licensing, Sound Design</p>
         </div>
-        <div className="floating-section">
-          <h3 className="section-title">Experience</h3>
+        <div className="section-item">
+          <h3 className="section-title">experience</h3>
           <p className="section-content">Turner Music, New York Fashion Week, Project Wayfarer</p>
         </div>
       </div>

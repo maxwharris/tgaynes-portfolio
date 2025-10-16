@@ -10,27 +10,28 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <h1>TRUMAN</h1>
-          <p>Music Producer</p>
+          <Link to="/" className="logo-link">
+            <h1>truman</h1>
+          </Link>
         </div>
         <div className="navbar-nav">
           <Link
             to="/"
             className={`navbar-item ${activeTab === '/' ? 'active' : ''}`}
           >
-            Home
+            About
           </Link>
           <Link
             to="/music"
             className={`navbar-item ${activeTab === '/music' ? 'active' : ''}`}
           >
-            Music
+            Projects
           </Link>
           <Link
             to="/experiences"
             className={`navbar-item ${activeTab === '/experiences' ? 'active' : ''}`}
           >
-            Experiences
+            Resume
           </Link>
           <Link
             to="/contact"
