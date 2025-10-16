@@ -25,13 +25,7 @@ function Navbar() {
             to="/music"
             className={`navbar-item ${activeTab === '/music' ? 'active' : ''}`}
           >
-            Projects
-          </Link>
-          <Link
-            to="/experiences"
-            className={`navbar-item ${activeTab === '/experiences' ? 'active' : ''}`}
-          >
-            Resume
+            Work
           </Link>
           <Link
             to="/contact"

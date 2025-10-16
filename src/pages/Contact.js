@@ -24,7 +24,7 @@ function Contact() {
 
   return (
     <div className="page">
-      <div className="page-header">
+      <div className="page-header" style={{ textAlign: 'center' }}>
         <h1 className="page-title">Contact</h1>
         <p className="page-subtitle">Get in touch for collaborations and inquiries</p>
       </div>

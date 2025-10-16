@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getDiscographyData } from '../utils/csvParser';
 import AudioVisualizer from '../components/AudioVisualizer';
+import ResumeCard from '../components/ResumeCard';
 
 function Music() {
   const discographyData = getDiscographyData();
@@ -17,12 +18,14 @@ function Music() {
 
   return (
     <div className="page">
-      
+      <div className="page-header" style={{ textAlign: 'center' }}>
+        <h1 className="page-title">Work</h1>
+        <p className="page-subtitle">Music production and professional experience</p>
+      </div>
 
       {/* Audio Visualizer Section */}
       <div className="card">
         <div className="audio-visualizer-section">
-
           {/* Cassette Tape Visualizer */}
           <AudioVisualizer
             tracks={tracks}
@@ -32,6 +35,11 @@ function Music() {
             className="cassette-player"
           />
         </div>
+      </div>
+
+      {/* Resume/Experience Section */}
+      <div className="card">
+        <ResumeCard />
       </div>
 
       {/* Original Discography Section (fallback) */}
