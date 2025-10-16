@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { getDiscographyData } from '../utils/csvParser';
 import AudioVisualizer from '../components/AudioVisualizer';
-import ResumeCard from '../components/ResumeCard';
 
 function Music() {
   const discographyData = getDiscographyData();
@@ -19,12 +18,12 @@ function Music() {
   return (
     <div className="page">
       <div className="page-header" style={{ textAlign: 'center' }}>
-        <h1 className="page-title">Work</h1>
-        <p className="page-subtitle">Music production and professional experience</p>
+        <h1 className="page-title">Music</h1>
+        <p className="page-subtitle">Music production and audio visualization</p>
       </div>
 
       {/* Audio Visualizer Section */}
-      <div className="card">
+
         <div className="audio-visualizer-section">
           {/* Cassette Tape Visualizer */}
           <AudioVisualizer
@@ -35,12 +34,7 @@ function Music() {
             className="cassette-player"
           />
         </div>
-      </div>
-
-      {/* Resume/Experience Section */}
-      <div className="card">
-        <ResumeCard />
-      </div>
+     
 
       {/* Original Discography Section (fallback) */}
       <div className="card">
@@ -67,6 +61,39 @@ function Music() {
                 </a>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Other Works Section */}
+      <div className="card">
+        <div className="other-works-section">
+          <h3>Other Works</h3>
+          <div className="video-grid">
+            <div className="video-wrapper">
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/P3wJe6OwCRM"
+                  title="Original Music Video 1"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="video-description">Original music</div>
+            </div>
+            <div className="video-wrapper">
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/xdTu_gU24_I"
+                  title="Original Music Video 2"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="video-description">Original music</div>
+            </div>
           </div>
         </div>
       </div>

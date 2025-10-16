@@ -146,7 +146,7 @@ function Contact() {
                 <div className="contact-icon">📍</div>
                 <div className="contact-details">
                   <div className="contact-label">Location</div>
-                  <div className="contact-value">Your City, State</div>
+                  <div className="contact-value">Manhattan, New York</div>
                 </div>
               </div>
             </div>

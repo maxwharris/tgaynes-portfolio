@@ -341,7 +341,8 @@ export default function AudioVisualizer({
               style={{
                 backgroundColor: currentTrackIndex === index && isPlaying ? '#ff4444' : currentTrackIndex === index ? '#cccccc' : 'rgba(255, 255, 255, 0.1)',
                 borderColor: currentTrackIndex === index ? '#999999' : '#666',
-                color: currentTrackIndex === index ? '#000' : '#fff'
+                color: currentTrackIndex === index ? '#000' : '#fff',
+                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
               }}
             >
               {track.name}
@@ -362,30 +363,30 @@ export default function AudioVisualizer({
 
         {/* Track Info */}
         <div className="cassette-info">
-          <div className="track-name">{currentTrack.name}</div>
+          <div className="track-name" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>{currentTrack.name}</div>
           <div className="track-description">
             {currentTrack.preset === 'electronic' && (
-              <span style={{ color: currentPalette[1] }}>
+              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
                 Neon dreams and digital pulses create an immersive electronic soundscape
               </span>
             )}
             {currentTrack.preset === 'ambient' && (
-              <span style={{ color: currentPalette[1] }}>
+              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
                 Ethereal atmospheres and gentle textures for deep contemplation
               </span>
             )}
             {currentTrack.preset === 'pop' && (
-              <span style={{ color: currentPalette[1] }}>
+              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
                 Catchy melodies and upbeat rhythms that get stuck in your head
               </span>
             )}
             {currentTrack.preset === 'rock' && (
-              <span style={{ color: currentPalette[1] }}>
+              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
                 Raw energy and powerful riffs that drive the soul
               </span>
             )}
             {currentTrack.preset === 'default' && (
-              <span style={{ color: currentPalette[1] }}>
+              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
                 Classic waveform visualization with balanced frequency response
               </span>
             )}
