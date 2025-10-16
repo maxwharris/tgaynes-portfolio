@@ -113,7 +113,7 @@ function Contact() {
               </div>
 
               <div className="form-group" style={{ textAlign: 'center' }}>
-                <button type="submit" className="btn">
+                <button type="submit" className="btn btn-secondary" style={{ fontSize: '14px', padding: '8px 16px' }}>
                   Send Message
                 </button>
               </div>
