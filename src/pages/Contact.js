@@ -99,21 +99,10 @@ function Contact() {
                 />
               </div>
 
-              {/* CAPTCHA v2 placeholder */}
-              <div className="form-group">
-                <div className="captcha-container">
-                  <div className="captcha-placeholder">
-                    <p>CAPTCHA v2 Verification</p>
-                    <div className="captcha-widget">
-                      [CAPTCHA Widget Placeholder]
-                    </div>
-                    <small>In production, integrate with reCAPTCHA v2</small>
-                  </div>
-                </div>
-              </div>
 
-              <div className="form-group" style={{ textAlign: 'center' }}>
-                <button type="submit" className="btn btn-secondary" style={{ fontSize: '14px', padding: '8px 16px' }}>
+
+              <div className="form-group" style={{ textAlign: 'center', marginTop: '32px', marginBottom: '16px' }}>
+                <button type="submit" className="btn btn-secondary" style={{ fontSize: '18px', padding: '16px 32px' }}>
                   Send Message
                 </button>
               </div>
