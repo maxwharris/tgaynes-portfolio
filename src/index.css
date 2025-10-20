@@ -490,30 +490,7 @@ html {
     0 -2px 4px rgba(0, 0, 0, 0.1) inset;
 }
 
-/* Hover state with enhanced reflection */
-.card:hover {
-  transform: translateY(-8px) scale(1.02) perspective(1000px) rotateX(2deg);
-  background:
-    linear-gradient(135deg, #ffffff 0%, #f8f9fa 25%, #e9ecef 50%, #dee2e6 75%, #ced4da 100%),
-    linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
-}
 
-.card:hover::before {
-  opacity: 0.9;
-  background:
-    conic-gradient(from 30deg at 15% 15%, rgba(255, 255, 255, 0.9) 0deg, transparent 45deg, transparent 180deg, rgba(0, 0, 0, 0.05) 240deg, transparent 300deg),
-    radial-gradient(ellipse at 25% 25%, rgba(255, 255, 255, 0.8) 0%, transparent 40%),
-    radial-gradient(ellipse at 75% 75%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
-}
-
-.card:hover {
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.2),
-    0 12px 24px rgba(0, 0, 0, 0.15),
-    0 6px 12px rgba(255, 255, 255, 0.4) inset,
-    0 3px 6px rgba(255, 255, 255, 0.3) inset,
-    0 -3px 6px rgba(0, 0, 0, 0.1) inset;
-}
 
 /* Floating sections */
 .floating-sections {
@@ -539,10 +516,7 @@ html {
   transition: all 0.3s ease;
 }
 
-.floating-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
+
 
 .section-title {
   font-size: 20px;
@@ -584,6 +558,23 @@ html {
 
 .playlist-embed {
   margin-bottom: 40px;
+}
+
+/* Section spacing for music page */
+.section-spacing {
+  margin-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .section-spacing {
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-spacing {
+    margin-bottom: 40px;
+  }
 }
 
 .discography-section h3 {

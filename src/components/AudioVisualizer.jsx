@@ -294,7 +294,7 @@ export default function AudioVisualizer({
     }
   }, [config.volume, config.fftSize, config.smoothing]);
 
-  // Handle track button clicks - toggle play/pause for current track
+  // Handle track button clicks - play on first press, toggle for current track
   const handleTrackClick = async (index) => {
     if (currentTrackIndex === index) {
       // Clicking the same track - toggle play/pause
@@ -304,11 +304,13 @@ export default function AudioVisualizer({
         await play();
       }
     } else {
-      // Changing to a different track
+      // Changing to a different track - stop current and play new track
       if (isPlaying) {
         pause();
       }
       onTrackChange && onTrackChange(index);
+      // Start playing the new track immediately
+      setTimeout(() => play(), 100);
     }
   };
 
@@ -363,33 +365,8 @@ export default function AudioVisualizer({
 
         {/* Track Info */}
         <div className="cassette-info">
-          <div className="track-name" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>{currentTrack.name}</div>
-          <div className="track-description">
-            {currentTrack.preset === 'electronic' && (
-              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
-                Neon dreams and digital pulses create an immersive electronic soundscape
-              </span>
-            )}
-            {currentTrack.preset === 'ambient' && (
-              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
-                Ethereal atmospheres and gentle textures for deep contemplation
-              </span>
-            )}
-            {currentTrack.preset === 'pop' && (
-              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
-                Catchy melodies and upbeat rhythms that get stuck in your head
-              </span>
-            )}
-            {currentTrack.preset === 'rock' && (
-              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
-                Raw energy and powerful riffs that drive the soul
-              </span>
-            )}
-            {currentTrack.preset === 'default' && (
-              <span style={{ color: currentPalette[1], fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
-                Classic waveform visualization with balanced frequency response
-              </span>
-            )}
+          <div className="track-name" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
+            {isPlaying ? `NOW PLAYING: ${currentTrack.name}` : currentTrack.name}
           </div>
         </div>
       </div>

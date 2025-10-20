@@ -23,21 +23,19 @@ function Music() {
       </div>
 
       {/* Audio Visualizer Section */}
-
-        <div className="audio-visualizer-section">
-          {/* Cassette Tape Visualizer */}
-          <AudioVisualizer
-            tracks={tracks}
-            currentTrackIndex={selectedTrack}
-            onTrackChange={setSelectedTrack}
-            height={350}
-            className="cassette-player"
-          />
-        </div>
-     
+      <div className="audio-visualizer-section section-spacing">
+        {/* Cassette Tape Visualizer */}
+        <AudioVisualizer
+          tracks={tracks}
+          currentTrackIndex={selectedTrack}
+          onTrackChange={setSelectedTrack}
+          height={350}
+          className="cassette-player"
+        />
+      </div>
 
       {/* Original Discography Section (fallback) */}
-      <div className="card">
+      <div className="card section-spacing">
         <div className="discography-section">
           <h3>Complete Discography</h3>
           <div className="discography-list">
