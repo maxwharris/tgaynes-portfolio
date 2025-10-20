@@ -304,13 +304,18 @@ export default function AudioVisualizer({
         await play();
       }
     } else {
-      // Changing to a different track - stop current and play new track
+      // Changing to a different track - stop current, switch track, then play new track
       if (isPlaying) {
         pause();
       }
       onTrackChange && onTrackChange(index);
-      // Start playing the new track immediately
-      setTimeout(() => play(), 100);
+
+      // Wait for the new track to load and then play it
+      // Use a longer delay for more reliable loading, especially for track 3
+      const delay = index === 2 ? 300 : 200; // Longer delay for track 3
+      setTimeout(async () => {
+        await play();
+      }, delay);
     }
   };
 
