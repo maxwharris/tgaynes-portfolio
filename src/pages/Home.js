@@ -80,14 +80,15 @@ function Home() {
         </div>
 
         <div className="video-showcase">
-          <iframe
-            src="https://www.youtube.com/embed/P3wJe6OwCRM"
-            title="Portfolio Video"
-            className="portfolio-video"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <div className="portfolio-video">
+            <iframe
+              src="https://www.youtube.com/embed/xdTu_gU24_I"
+              title="Portfolio Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
     </div>

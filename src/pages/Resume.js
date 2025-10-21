@@ -58,7 +58,35 @@ function Resume() {
       
 
       <div className="resume-wrapper">
-        
+        <div className="education-section">
+          <h2 className="education-title">Education</h2>
+          <div className="education-content">
+            <h3 className="school-name">New York University</h3>
+            <p className="graduation">Graduated: May 2024</p>
+            <p className="degree">Bachelor of Music: Music Technology</p>
+            <p className="minor">Minor: Business of Entertainment, Media and Technology (BEMT)</p>
+            <p className="honors">Honors: NYU Steinhardt Scholarship</p>
+            <div className="coursework">
+              <p className="coursework-title">Relevant Coursework:</p>
+              <p className="courses">Music Business Strategy, Strategic Music and Branding, Marketing Statistics</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="skills-section">
+          <h2 className="skills-title">Skills</h2>
+          <div className="skills-content">
+            <div className="skill-category">
+              <h3 className="skill-category-title">Language</h3>
+              <p className="skill-items">Spanish (Fluent), Italian (Fluent), French (Conversational)</p>
+            </div>
+            <div className="skill-category">
+              <h3 className="skill-category-title">Technical</h3>
+              <p className="skill-items">Ableton Live (Advanced), Pro Tools (Intermediate), Airtable (Intermediate), C++ (Beginner), HTML (Beginner)</p>
+            </div>
+          </div>
+        </div>
+
         <div className="resume-text-container">
           <div className="resume-header">
           <h1>Resume</h1>

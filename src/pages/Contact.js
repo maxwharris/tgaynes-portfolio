@@ -119,7 +119,7 @@ function Contact() {
                 <div className="contact-icon">✉️</div>
                 <div className="contact-details">
                   <div className="contact-label">Email</div>
-                  <div className="contact-value">your.email@example.com</div>
+                  <div className="contact-value">trumangaynes@gmail.com</div>
                 </div>
               </div>
 
@@ -127,7 +127,7 @@ function Contact() {
                 <div className="contact-icon">📱</div>
                 <div className="contact-details">
                   <div className="contact-label">Phone</div>
-                  <div className="contact-value">+1 (555) 123-4567</div>
+                  <div className="contact-value">+1 (310) 975-4896</div>
                 </div>
               </div>
 
