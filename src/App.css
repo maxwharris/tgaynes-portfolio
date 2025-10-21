@@ -326,3 +326,174 @@
     min-width: 50px;
   }
 }
+
+/* Resume Page Styles */
+.resume-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.resume-text-container {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.resume-text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.resume-text-container h1,
+.resume-text-container h2,
+.resume-text-container h3,
+.resume-text-container h4,
+.resume-text-container h5,
+.resume-text-container h6 {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #2c3e50;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.resume-text-container h1:first-child,
+.resume-text-container h2:first-child,
+.resume-text-container h3:first-child {
+  margin-top: 0;
+}
+
+/* Enhanced Resume Content Styling */
+.resume-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #3498db;
+}
+
+.resume-header h1 {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #2c3e50;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.company-header {
+  margin-bottom: 15px;
+  margin-top: 30px;
+}
+
+.company-name {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 40px !important;
+  margin-bottom: 5px !important;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 3px;
+  display: inline;
+}
+
+.company-location {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #34495e;
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #7f8c8d;
+}
+
+.job-title {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #34495e;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px !important;
+  margin-bottom: 5px !important;
+  color: #2980b9;
+}
+
+.job-dates {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-bottom: 10px !important;
+  font-style: italic;
+}
+
+.resume-bullet {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin-bottom: 8px !important;
+  margin-left: 20px;
+  text-indent: -15px;
+}
+
+.resume-paragraph {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin-bottom: 8px !important;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-size: 16px;
+}
+
+.loading {
+  color: #3498db;
+}
+
+.error {
+  color: #e74c3c;
+  background-color: #fdf2f2;
+  border-radius: 4px;
+  border: 1px solid #fecaca;
+}
+
+/* Responsive design for resume */
+@media (max-width: 768px) {
+  .resume-wrapper {
+    padding: 15px;
+  }
+
+  .resume-text-container {
+    padding: 20px;
+  }
+
+  .resume-text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .resume-wrapper {
+    padding: 10px;
+  }
+
+  .resume-text-container {
+    padding: 15px;
+  }
+
+  .resume-text {
+    font-size: 14px;
+  }
+}
