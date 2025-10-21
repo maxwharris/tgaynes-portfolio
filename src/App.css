@@ -541,7 +541,7 @@
 .education-section {
   position: absolute;
   left: 20px;
-  top: 0;
+  top: 20px;
   width: 280px;
   background:
     linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #adb5bd 100%),
@@ -641,7 +641,7 @@
 .skills-section {
   position: absolute;
   left: 20px;
-  top: 520px; /* Position below education section */
+  top: 540px; /* Position below education section */
   width: 280px;
   background:
     linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #adb5bd 100%),
