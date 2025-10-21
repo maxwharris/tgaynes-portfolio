@@ -33,8 +33,8 @@ function Home() {
 
   return (
     <div className="page">
-      {/* Hero Section */}
-      <div className="hero-section">
+      {/* Hero Section - 2 Column Layout */}
+      <div className="hero-section-2col">
         <div className="hero-image">
           <img
             src="/media/images/profile.jpg"
@@ -47,29 +47,9 @@ function Home() {
         </div>
 
         <div className="hero-content">
-          <h1 className="hero-title">Music, Storytelling, and Sound Design</h1>
           <div className="hero-description">
+            <h1 className="hero-title">Music, Storytelling, and Sound Design</h1>
             <p>I'm Truman Gaynes, a New York-based music technologist and licensing coordinator connecting sound to story across entertainment, fashion, and brands. I compose daily, edit dialogue and ADR, and manage organized delivery workflows that help creative teams move faster.</p>
-          </div>
-        </div>
-
-        <div className="hero-project">
-          <div className="video-showcase">
-            <iframe
-              src="https://www.youtube.com/embed/P3wJe6OwCRM"
-              title="Portfolio Video"
-              className="portfolio-video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-
-          <div className="my-story">
-            <h3 className="story-title">My Story</h3>
-            <div className="story-content">
-              <p>My background in Music Technology and the Business of Entertainment (NYU) bridges the creative and logistical sides of sound. I've worked on dozens of original compositions, including for New York Fashion Week, interactive scores for indie games, and helping with custom pitches at Tuner Music for global brands.</p>
-            </div>
           </div>
         </div>
       </div>
@@ -86,7 +66,28 @@ function Home() {
         </div>
         <div className="section-item">
           <h3 className="section-title">experience</h3>
-          <p className="section-content">Turner Music, New York Fashion Week, Project Wayfarer</p>
+          <p className="section-content">Turner Music, NYFW, Project Wayfarer</p>
+        </div>
+      </div>
+
+      {/* My Story and Video Section */}
+      <div className="story-video-section">
+        <div className="my-story">
+          <h3 className="story-title">My Story</h3>
+          <div className="story-content">
+            <p>My background in Music Technology and the Business of Entertainment (NYU) bridges the creative and logistical sides of sound. I've worked on dozens of original compositions, including for New York Fashion Week, interactive scores for indie games, and helping with custom pitches at Tuner Music for global brands.</p>
+          </div>
+        </div>
+
+        <div className="video-showcase">
+          <iframe
+            src="https://www.youtube.com/embed/P3wJe6OwCRM"
+            title="Portfolio Video"
+            className="portfolio-video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
       </div>
     </div>

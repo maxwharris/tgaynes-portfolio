@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
 export default function AudioVisualizer({
+  folders = [],
   tracks = [],
   currentTrackIndex = null,
   onTrackChange,
+  onFolderChange,
+  selectedFolder = null,
   width = "100%",
   height = 300,
   className = ""
@@ -85,30 +88,42 @@ export default function AudioVisualizer({
 
   const config = presets[currentTrack.preset] || presets.default;
 
-  // Ensure audio context exists
-  const ensureAudio = () => {
+  // Ensure audio context exists and is running
+  const ensureAudio = async () => {
     if (!audioCtxRef.current) {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) throw new Error("Web Audio is not supported in this browser.");
       audioCtxRef.current = new AC();
     }
+
     const ctx = audioCtxRef.current;
+
     if (!gainRef.current) {
       gainRef.current = ctx.createGain();
       gainRef.current.gain.value = config.volume;
     }
+
     if (!analyserRef.current) {
       analyserRef.current = ctx.createAnalyser();
       analyserRef.current.fftSize = config.fftSize;
       analyserRef.current.smoothingTimeConstant = config.smoothing;
-    } else {
-      analyserRef.current.fftSize = config.fftSize;
-      analyserRef.current.smoothingTimeConstant = config.smoothing;
     }
-    // Connect gain -> analyser -> destination if not already
-    try { gainRef.current.disconnect(); } catch {}
-    gainRef.current.connect(analyserRef.current);
-    analyserRef.current.connect(ctx.destination);
+
+    return ctx;
+  };
+
+  // Initialize audio context on user interaction
+  const initializeAudioContext = async () => {
+    if (!audioCtxRef.current) {
+      await ensureAudio();
+    }
+
+    const ctx = audioCtxRef.current;
+
+    if (ctx.state === "suspended") {
+      await ctx.resume();
+    }
+
     return ctx;
   };
 
@@ -117,56 +132,94 @@ export default function AudioVisualizer({
     const currentTrack = tracks[currentTrackIndex];
     if (!currentTrack) return;
 
+    const ctx = await ensureAudio();
+
+    const fileExtension = currentTrack.file.split('.').pop().toLowerCase();
+    const isMP3 = fileExtension === 'mp3';
+
+    const headers = {
+      'Accept': isMP3 ? 'audio/mpeg' : 'audio/wav',
+    };
+
+    const response = await fetch(`/media/music/${currentTrack.file}`, {
+      method: 'GET',
+      headers: headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText} - File: ${currentTrack.file}`);
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+
     try {
-      const ctx = ensureAudio();
-      if (ctx.state === "suspended") await ctx.resume();
-
-      const response = await fetch(`/media/music/${currentTrack.file}`);
-      const arrayBuffer = await response.arrayBuffer();
       const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
-
       bufferRef.current = audioBuffer;
-
-      // Don't auto-play - wait for user interaction
-    } catch (err) {
-      console.error("Failed to load audio:", err);
+    } catch (decodeError) {
+      if (isMP3) {
+        throw new Error(`MP3 decoding failed: ${currentTrack.file}. This could be due to browser compatibility or MP3 encoding issues.`);
+      } else {
+        throw new Error(`Audio decoding failed: ${currentTrack.file}. The file format may not be supported.`);
+      }
     }
   };
 
   // Start playback
   const play = async () => {
     try {
-      const buf = bufferRef.current;
+      let buf = bufferRef.current;
+
       if (!buf) {
         await loadAudio();
-        return;
+        buf = bufferRef.current;
       }
 
-      const ctx = ensureAudio();
-      if (ctx.state === "suspended") await ctx.resume();
+      if (!buf) {
+        throw new Error("No audio buffer available");
+      }
 
-      // Stop any previous source
-      try { sourceRef.current?.stop(0); sourceRef.current?.disconnect(); } catch {}
+      const ctx = await ensureAudio();
+
+      if (ctx.state === "suspended") {
+        await ctx.resume();
+      }
+
+      if (sourceRef.current) {
+        try {
+          sourceRef.current.stop(0);
+          sourceRef.current.disconnect();
+        } catch (e) {}
+        sourceRef.current = null;
+      }
 
       const src = ctx.createBufferSource();
       src.buffer = buf;
       sourceRef.current = src;
-      src.connect(gainRef.current);
+
+      try {
+        try { gainRef.current.disconnect(); } catch (e) {}
+        try { analyserRef.current.disconnect(); } catch (e) {}
+
+        src.connect(gainRef.current);
+        gainRef.current.connect(analyserRef.current);
+        analyserRef.current.connect(ctx.destination);
+      } catch (e) {
+        try {
+          src.connect(ctx.destination);
+        } catch (fallbackError) {
+          throw e;
+        }
+      }
 
       src.start(0);
       setIsPlaying(true);
-
-      // Loop the audio
       src.loop = true;
-
-      // When source ends (if not looping), reset play state
-      src.onended = () => {
-        setIsPlaying(false);
-      };
-
+      src.onended = () => setIsPlaying(false);
       loop();
-    } catch (err) {
-      console.error("Play failed:", err);
+
+    } catch (error) {
+      setIsPlaying(false);
+      throw error;
     }
   };
 
@@ -296,6 +349,8 @@ export default function AudioVisualizer({
 
   // Handle track button clicks - play on first press, toggle for current track
   const handleTrackClick = async (index) => {
+    const targetTrack = tracks[index];
+
     if (currentTrackIndex === index) {
       // Clicking the same track - toggle play/pause
       if (isPlaying) {
@@ -308,20 +363,95 @@ export default function AudioVisualizer({
       if (isPlaying) {
         pause();
       }
+
+      // Update parent component state first
       onTrackChange && onTrackChange(index);
 
-      // Wait for the new track to load and then play it
-      // Use a longer delay for more reliable loading, especially for track 3
-      const delay = index === 2 ? 300 : 200; // Longer delay for track 3
-      setTimeout(async () => {
-        await play();
-      }, delay);
+      // Wait for state update and load the new track
+      if (targetTrack && targetTrack.file) {
+        // Load the new track immediately using the target track data
+        const ctx = await ensureAudio();
+
+        try {
+          const fileExtension = targetTrack.file.split('.').pop().toLowerCase();
+          const isMP3 = fileExtension === 'mp3';
+          const headers = { 'Accept': isMP3 ? 'audio/mpeg' : 'audio/wav' };
+
+          const response = await fetch(`/media/music/${targetTrack.file}`, {
+            method: 'GET',
+            headers: headers,
+          });
+
+          if (response.ok) {
+            const arrayBuffer = await response.arrayBuffer();
+            const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+
+            // Update buffer with new track
+            bufferRef.current = audioBuffer;
+
+            // Now play the new track
+            await playWithBuffer(audioBuffer);
+          }
+        } catch (error) {
+          console.error("Failed to load new track:", error);
+          throw error;
+        }
+      }
+    }
+  };
+
+  // Play with specific buffer (for track changes)
+  const playWithBuffer = async (audioBuffer) => {
+    try {
+      const ctx = await ensureAudio();
+
+      if (ctx.state === "suspended") {
+        await ctx.resume();
+      }
+
+      if (sourceRef.current) {
+        try {
+          sourceRef.current.stop(0);
+          sourceRef.current.disconnect();
+        } catch (e) {}
+        sourceRef.current = null;
+      }
+
+      const src = ctx.createBufferSource();
+      src.buffer = audioBuffer;
+      sourceRef.current = src;
+
+      try {
+        try { gainRef.current.disconnect(); } catch (e) {}
+        try { analyserRef.current.disconnect(); } catch (e) {}
+
+        src.connect(gainRef.current);
+        gainRef.current.connect(analyserRef.current);
+        analyserRef.current.connect(ctx.destination);
+      } catch (e) {
+        try {
+          src.connect(ctx.destination);
+        } catch (fallbackError) {
+          throw e;
+        }
+      }
+
+      src.start(0);
+      setIsPlaying(true);
+      src.loop = true;
+      src.onended = () => setIsPlaying(false);
+      loop();
+
+    } catch (error) {
+      setIsPlaying(false);
+      throw error;
     }
   };
 
   // Initialize when component mounts or track changes
   useEffect(() => {
-    if (currentTrack && currentTrack.file) {
+    // Only load audio if we're not currently playing and have a valid track
+    if (currentTrack && currentTrack.file && !isPlaying) {
       loadAudio();
     }
 
@@ -334,27 +464,64 @@ export default function AudioVisualizer({
   // Get current palette for styling
   const currentPalette = presets[currentTrack.preset]?.palette || presets.default.palette;
 
+  const handleFolderClick = (folderName) => {
+    onFolderChange && onFolderChange(folderName);
+  };
+
+  // Handle user interaction to initialize audio context
+  const handleUserInteraction = async () => {
+    await initializeAudioContext();
+  };
+
   return (
-    <div className={`cassette-visualizer ${className}`} style={{ width }}>
+    <div
+      className={`cassette-visualizer ${className}`}
+      style={{ width }}
+      onClick={handleUserInteraction}
+    >
       {/* Cassette Tape Body */}
       <div className="cassette-body">
+        {/* Category Selection */}
+        {folders.length > 0 && (
+          <div className="cassette-categories">
+            <div className="category-label">playlists</div>
+            <div className="category-buttons">
+              {folders.map((folder) => (
+                <button
+                  key={folder.name}
+                  className={`category-button ${selectedFolder === folder.name ? 'active' : ''}`}
+                  onClick={() => handleFolderClick(folder.name)}
+                >
+                  {folder.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Track Selection Buttons */}
         <div className="cassette-controls">
-          {tracks.map((track, index) => (
-            <button
-              key={index}
-              className={`track-button ${currentTrackIndex === index ? 'active' : ''}`}
-              onClick={() => handleTrackClick(index)}
-              style={{
-                backgroundColor: currentTrackIndex === index && isPlaying ? '#ff4444' : currentTrackIndex === index ? '#cccccc' : 'rgba(255, 255, 255, 0.1)',
-                borderColor: currentTrackIndex === index ? '#999999' : '#666',
-                color: currentTrackIndex === index ? '#000' : '#fff',
-                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
-              }}
-            >
-              {track.name}
-            </button>
-          ))}
+          {tracks.length > 0 ? (
+            tracks.map((track, index) => (
+              <button
+                key={index}
+                className={`track-button ${currentTrackIndex === index ? 'active' : ''}`}
+                onClick={() => handleTrackClick(index)}
+                style={{
+                  backgroundColor: currentTrackIndex === index && isPlaying ? '#ff4444' : currentTrackIndex === index ? '#cccccc' : 'rgba(255, 255, 255, 0.1)',
+                  borderColor: currentTrackIndex === index ? '#999999' : '#666',
+                  color: currentTrackIndex === index ? '#000' : '#fff',
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+                }}
+              >
+                {track.name}
+              </button>
+            ))
+          ) : (
+            <div className="no-tracks-message">
+              {selectedFolder ? `No tracks in ${selectedFolder}` : 'Select a category to view tracks'}
+            </div>
+          )}
         </div>
 
         {/* Cassette Window (Visualizer) */}
@@ -363,7 +530,7 @@ export default function AudioVisualizer({
             <canvas
               ref={canvasRef}
               className="visualizer-screen"
-              style={{ height: height - 80 }} // Account for controls and frame
+              style={{ height: height - 120 }} // Account for controls and categories
             />
           </div>
         </div>
