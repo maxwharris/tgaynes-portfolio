@@ -17,31 +17,60 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('=== FORM SUBMISSION STARTED ===');
+    console.log('Timestamp:', new Date().toISOString());
+    
     // Handle form submission with fetch to avoid full page reload
     const form = e.target;
     const formData = new FormData(form);
+    
+    // Log form data being submitted
+    console.log('Form Data Being Submitted:');
+    for (let [key, value] of formData.entries()) {
+      console.log(`  ${key}: ${value}`);
+    }
+    
+    console.log('Submitting to: https://formsubmit.co/trumangaynes@gmail.com');
+    console.log('Method: POST');
 
     fetch('https://formsubmit.co/trumangaynes@gmail.com', {
       method: 'POST',
       body: formData,
     })
     .then(response => {
+      console.log('=== RESPONSE RECEIVED ===');
+      console.log('Status:', response.status);
+      console.log('Status Text:', response.statusText);
+      console.log('OK:', response.ok);
+      console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
+      
       if (response.ok) {
+        console.log('✓ Form submission successful!');
         alert('Thank you for your message! It has been sent successfully.');
+        
         // Reset form
+        console.log('Resetting form fields...');
         setFormData({
           name: '',
           email: '',
           subject: '',
           message: ''
         });
+        console.log('Form reset complete');
       } else {
+        console.error('✗ Form submission failed with status:', response.status);
         alert('There was an error sending your message. Please try again.');
       }
+      console.log('=== FORM SUBMISSION COMPLETE ===\n');
     })
     .catch(error => {
-      console.error('Error:', error);
+      console.error('=== FORM SUBMISSION ERROR ===');
+      console.error('Error Type:', error.name);
+      console.error('Error Message:', error.message);
+      console.error('Error Stack:', error.stack);
+      console.error('Full Error Object:', error);
       alert('There was an error sending your message. Please try again.');
+      console.log('=== FORM SUBMISSION COMPLETE (WITH ERROR) ===\n');
     });
   };
 
