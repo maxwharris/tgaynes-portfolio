@@ -437,6 +437,8 @@ html {
   line-height: 1.6;
   color: #333;
   margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Content Sections */
@@ -1156,6 +1158,7 @@ html {
   }
 
   .hero-img {
+    width: 300px;
     height: 300px;
   }
 
@@ -1174,6 +1177,10 @@ html {
 
   .my-story {
     padding: 25px;
+  }
+
+  .story-content p {
+    font-size: 15px;
   }
 
   /* Story and video section responsive */
@@ -1284,7 +1291,11 @@ html {
   }
 
   .my-story {
-    padding: 20px;
+    padding: 15px;
+  }
+
+  .story-content p {
+    font-size: 14px;
   }
 
   .section-item {
@@ -1297,6 +1308,6 @@ html {
   }
 
   .section-item .section-content {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
