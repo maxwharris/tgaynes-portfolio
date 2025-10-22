@@ -1,9 +1,22 @@
 /* App-specific styles */
 .app {
   min-height: 100vh;
-  font-family: 'Avenir', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+}
+
+/* Shine animation keyframes */
+@keyframes shineAnimation {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.2;
+  }
 }
 
 .main-content {
@@ -368,9 +381,7 @@
 }
 
 .resume-text-container {
-  background:
-    linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #adb5bd 100%),
-    linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
   border-radius: 20px;
   padding: 32px;
   margin-bottom: 24px;
@@ -395,7 +406,8 @@
     conic-gradient(from 45deg at 20% 20%, rgba(255, 255, 255, 0.8) 0deg, transparent 60deg, transparent 180deg, rgba(0, 0, 0, 0.1) 240deg, transparent 300deg),
     radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.3;
+  animation: shineAnimation 4s infinite linear;
 }
 
 /* Beveled edge effect for resume container */
@@ -428,7 +440,7 @@
     sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #333;
+  color: #cccccc;
   margin: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -445,7 +457,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   margin-top: 25px;
   margin-bottom: 10px;
   font-weight: 600;
@@ -462,14 +474,14 @@
   text-align: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 3px solid #333;
+  border-bottom: 3px solid #cccccc;
 }
 
 .resume-header h1 {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 32px;
   font-weight: 700;
   margin: 0;
@@ -486,12 +498,12 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 600;
   margin-top: 40px !important;
   margin-bottom: 5px !important;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #cccccc;
   padding-bottom: 3px;
   display: inline;
 }
@@ -500,7 +512,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #666;
+  color: #cccccc;
   font-size: 12px;
   font-weight: 400;
   margin-left: 10px;
@@ -510,7 +522,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #333;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 600;
   margin-top: 10px !important;
@@ -521,7 +533,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #666;
+  color: #cccccc;
   font-size: 14px;
   margin-bottom: 10px !important;
   font-style: italic;
@@ -533,7 +545,7 @@
     sans-serif;
   font-size: 15px;
   line-height: 1.6;
-  color: #333;
+  color: #cccccc;
   margin-bottom: 8px !important;
   margin-left: 20px;
   text-indent: -15px;
@@ -545,7 +557,7 @@
     sans-serif;
   font-size: 15px;
   line-height: 1.6;
-  color: #333;
+  color: #cccccc;
   margin-bottom: 8px !important;
 }
 
@@ -575,17 +587,15 @@
   left: 20px;
   top: 20px;
   width: 280px;
-  background:
-    linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #adb5bd 100%),
-    linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
   border-radius: 20px;
   padding: 24px;
   border: 2px solid rgba(255, 255, 255, 0.8);
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.15),
-    0 8px 16px rgba(0, 0, 0, 0.1),
-    0 4px 8px rgba(255, 255, 255, 0.3) inset,
-    0 2px 4px rgba(255, 255, 255, 0.2) inset,
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(255, 255, 255, 0.1) inset,
+    0 2px 4px rgba(255, 255, 255, 0.05) inset,
     0 -2px 4px rgba(0, 0, 0, 0.1) inset;
   transition: all 0.4s ease;
   z-index: 10;
@@ -603,19 +613,20 @@
     conic-gradient(from 45deg at 20% 20%, rgba(255, 255, 255, 0.8) 0deg, transparent 60deg, transparent 180deg, rgba(0, 0, 0, 0.1) 240deg, transparent 300deg),
     radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.3;
+  animation: shineAnimation 4s infinite linear;
 }
 
 .education-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #cccccc;
   padding-bottom: 10px;
   position: relative;
   z-index: 1;
@@ -630,7 +641,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -641,7 +652,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #333;
+  color: #cccccc;
   font-size: 14px;
   margin-bottom: 6px;
   margin-top: 0;
@@ -651,7 +662,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 600;
   margin-top: 12px;
@@ -662,7 +673,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #666;
+  color: #cccccc;
   font-size: 13px;
   margin-bottom: 6px;
   line-height: 1.4;
@@ -675,17 +686,15 @@
   left: 20px;
   top: 540px; /* Position below education section */
   width: 280px;
-  background:
-    linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #ced4da 75%, #adb5bd 100%),
-    linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
   border-radius: 20px;
   padding: 24px;
   border: 2px solid rgba(255, 255, 255, 0.8);
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.15),
-    0 8px 16px rgba(0, 0, 0, 0.1),
-    0 4px 8px rgba(255, 255, 255, 0.3) inset,
-    0 2px 4px rgba(255, 255, 255, 0.2) inset,
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(255, 255, 255, 0.1) inset,
+    0 2px 4px rgba(255, 255, 255, 0.05) inset,
     0 -2px 4px rgba(0, 0, 0, 0.1) inset;
   transition: all 0.4s ease;
   z-index: 10;
@@ -703,19 +712,20 @@
     conic-gradient(from 45deg at 20% 20%, rgba(255, 255, 255, 0.8) 0deg, transparent 60deg, transparent 180deg, rgba(0, 0, 0, 0.1) 240deg, transparent 300deg),
     radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.3;
+  animation: shineAnimation 4s infinite linear;
 }
 
 .skills-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #cccccc;
   padding-bottom: 10px;
   position: relative;
   z-index: 1;
@@ -738,7 +748,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #000;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -749,7 +759,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  color: #333;
+  color: #cccccc;
   font-size: 14px;
   margin: 0;
   line-height: 1.5;

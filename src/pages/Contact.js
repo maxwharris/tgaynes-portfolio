@@ -200,7 +200,7 @@ function Contact() {
             {/* Profile Image */}
             <div className="contact-profile">
               <img
-                src="/media/images/profile.jpg"
+                src="/media/images/profile.png"
                 alt="Profile"
                 className="contact-profile-image"
                 onError={(e) => {

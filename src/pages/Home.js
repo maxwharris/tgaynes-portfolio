@@ -36,14 +36,14 @@ function Home() {
       {/* Hero Section - 2 Column Layout */}
       <div className="hero-section-2col">
         <div className="hero-image">
-          <img
-            src="/media/images/profile.jpg"
-            alt="Truman Gaynes at work"
-            className="hero-img"
-            onError={(e) => {
-              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjVGNUY1Ii8+CjxjaXJjbGUgY3g9IjIwMCIgY3k9IjE1MCIgcj0iNDAiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+';
-            }}
-          />
+            <img
+              src="/media/images/profile.png"
+              alt="Truman Gaynes at work"
+              className="hero-img"
+              onError={(e) => {
+                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjVGNUY1Ii8+CjxjaXJjbGUgY3g9IjIwMCIgY3k9IjE1MCIgcj0iNDAiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+';
+              }}
+            />
         </div>
 
         <div className="hero-content">
@@ -88,6 +88,27 @@ function Home() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
+          </div>
+        </div>
+      </div>
+
+      {/* Video and Story Section - Video Left, Text Right */}
+      <div className="video-story-section">
+        <div className="video-showcase">
+          <div className="portfolio-video">
+            <iframe
+              src="https://www.youtube.com/embed/P3wJe6OwCRM"
+              title="Music Portfolio Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+
+        <div className="my-story">
+          <div className="story-content">
+            <p>I'm passionate about how music transcends borders and mediums, using sound to shape emotional and interactive experiences. My work thrives at the intersection of composition, storytelling, and technology—collaborating with diverse artists worldwide to craft music that not only supports narrative but drives it forward.</p>
           </div>
         </div>
       </div>
