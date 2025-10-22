@@ -17,9 +17,32 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In a real application, you would handle form submission here
-    // For now, we'll just show an alert
-    alert('Thank you for your message! This is a demo form - in a real application, this would be submitted to a server.');
+    // Handle form submission with fetch to avoid full page reload
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('https://formsubmit.co/trumangaynes@gmail.com', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Thank you for your message! It has been sent successfully.');
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        alert('There was an error sending your message. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error sending your message. Please try again.');
+    });
   };
 
   return (
@@ -39,6 +62,11 @@ function Contact() {
             </p>
 
             <form className="contact-form" onSubmit={handleSubmit}>
+              {/* Hidden fields for FormSubmit.co */}
+              <input type="hidden" name="_next" value={window.location.href} />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_subject" value="New Contact Form Submission" />
+
               <div className="form-group">
                 <label htmlFor="name" className="form-label">
                   Name *
