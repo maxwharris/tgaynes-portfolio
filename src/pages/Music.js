@@ -77,7 +77,7 @@ function Music() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        padding: '20px'
+        padding: '10px' // Reduced padding for mobile
       }}>
         {/* Cassette Tape Visualizer with Integrated Categories */}
         <AudioVisualizer
@@ -87,7 +87,7 @@ function Music() {
           onTrackChange={handleTrackChange}
           onFolderChange={handleFolderSelect}
           selectedFolder={selectedFolder}
-          height={800}
+          height={600} // Reduced from 800px for mobile
           className="cassette-player"
         />
       </div>

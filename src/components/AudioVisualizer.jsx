@@ -26,6 +26,7 @@ export default function AudioVisualizer({
 
   // Transport state
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Preset configurations
   const presets = {
@@ -364,15 +365,18 @@ export default function AudioVisualizer({
         pause();
       }
 
+      // Set loading state
+      setIsLoading(true);
+
       // Update parent component state first
       onTrackChange && onTrackChange(index);
 
       // Wait for state update and load the new track
       if (targetTrack && targetTrack.file) {
-        // Load the new track immediately using the target track data
-        const ctx = await ensureAudio();
-
         try {
+          // Load the new track immediately using the target track data
+          const ctx = await ensureAudio();
+
           const fileExtension = targetTrack.file.split('.').pop().toLowerCase();
           const isMP3 = fileExtension === 'mp3';
           const headers = { 'Accept': isMP3 ? 'audio/mpeg' : 'audio/wav' };
@@ -394,8 +398,11 @@ export default function AudioVisualizer({
           }
         } catch (error) {
           console.error("Failed to load new track:", error);
-          throw error;
+        } finally {
+          setIsLoading(false);
         }
+      } else {
+        setIsLoading(false);
       }
     }
   };
@@ -476,7 +483,11 @@ export default function AudioVisualizer({
   return (
     <div
       className={`cassette-visualizer ${className}`}
-      style={{ width }}
+      style={{
+        width,
+        maxWidth: '100%',
+        margin: '0 auto'
+      }}
       onClick={handleUserInteraction}
     >
       {/* Cassette Tape Body */}
@@ -505,16 +516,19 @@ export default function AudioVisualizer({
             tracks.map((track, index) => (
               <button
                 key={index}
-                className={`track-button ${currentTrackIndex === index ? 'active' : ''}`}
+                className={`track-button ${currentTrackIndex === index ? 'active' : ''} ${isLoading && currentTrackIndex === index ? 'loading' : ''}`}
                 onClick={() => handleTrackClick(index)}
+                disabled={isLoading}
                 style={{
                   backgroundColor: currentTrackIndex === index && isPlaying ? '#ff4444' : currentTrackIndex === index ? '#cccccc' : 'rgba(255, 255, 255, 0.1)',
                   borderColor: currentTrackIndex === index ? '#999999' : '#666',
                   color: currentTrackIndex === index ? '#000' : '#fff',
-                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+                  opacity: isLoading ? 0.7 : 1,
+                  cursor: isLoading ? 'wait' : 'pointer'
                 }}
               >
-                {track.name}
+                {isLoading && currentTrackIndex === index ? 'Loading...' : track.name}
               </button>
             ))
           ) : (
@@ -530,7 +544,10 @@ export default function AudioVisualizer({
             <canvas
               ref={canvasRef}
               className="visualizer-screen"
-              style={{ height: height - 120 }} // Account for controls and categories
+              style={{
+                height: height - 120, // Account for controls and categories
+                maxHeight: '400px' // Limit max height for mobile
+              }}
             />
           </div>
         </div>
@@ -538,7 +555,7 @@ export default function AudioVisualizer({
         {/* Track Info */}
         <div className="cassette-info">
           <div className="track-name" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" }}>
-            {isPlaying ? `NOW PLAYING: ${currentTrack.name}` : currentTrack.name}
+            {isLoading ? 'Loading track...' : (isPlaying ? `NOW PLAYING: ${currentTrack.name}` : currentTrack.name)}
           </div>
         </div>
       </div>
